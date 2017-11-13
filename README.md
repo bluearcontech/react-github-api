@@ -9,7 +9,7 @@ This project search github user with username and list the repositories for the 
 - [**Redux**](http://redux.js.org/) predictable state containers.
 - [**Redux Saga**](https://redux-saga.github.io/redux-saga/) [~~Redux Thunk~~]
 for asynchronous action creators.
-- [**Styled Components**](https://www.styled-components.com/) styled-components utilises tagged template literals to style your components..
+- [**Styled Components**](https://www.styled-components.com/) styled-components utilises tagged template literals to style your components.
 - Hot reloading using [**Webpack HMR**](https://webpack.js.org/concepts/hot-module-replacement/).
 - [**Webpack 3**](https://webpack.js.org/) for both development and production bundles.
 
