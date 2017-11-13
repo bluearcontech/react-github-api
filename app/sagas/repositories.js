@@ -9,7 +9,7 @@ export function* getUserRepoRequest(action) {
         const repsitories = yield call(Api.getRepositories, action.username)
         yield put(setUserReposInfo(repsitories))
     } catch (e) {
-        yield put(showMessageRequest(e))
+        yield put(showMessageRequest(e, "repo"))
     }
 }
 

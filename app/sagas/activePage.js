@@ -1,5 +1,4 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { showMessageRequest } from '../actions/messages'
 import { getActivePageInfo } from '../actions/activePage'
 import * as types from '../actions/types'
 

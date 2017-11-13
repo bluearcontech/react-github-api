@@ -9,7 +9,7 @@ export function* getUserRequest(action) {
         const user = yield call(Api.getUser, action.username)
         yield put(setUserInfo(user))
     } catch (e) {
-        yield put(showMessageRequest(e))
+        yield put(showMessageRequest(e, "user"))
     }
 }
 

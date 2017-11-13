@@ -6,12 +6,14 @@ import * as types from '../actions/types'
 let globalMessageId = 0
 
 export function* showMessageRequest(action) {
-    globalMessageId += 1
+    if(action.requestType == "user") {
+        globalMessageId += 1
 
-    const messageId = globalMessageId
-    yield put(showMessage(messageId, action.message))
-    yield call(delay, action.timeout || 3000)
-    yield put(hideMessage(messageId))
+        const messageId = globalMessageId
+        yield put(showMessage(messageId, action.message))
+        yield call(delay, action.timeout || 3000)
+        yield put(hideMessage(messageId))
+    }
 }
 
 export function* watchShowMessageRequest() {
