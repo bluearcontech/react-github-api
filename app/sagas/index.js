@@ -4,13 +4,14 @@ import { watchGetUserRepoRequest } from './repositories'
 import { watchShowMessageRequest } from './messages'
 import { watchGetUserFilterRepoRequest } from './filterRepositories'
 import { watchRepoStarGazersRequest } from './starGazers'
-
+import { watchSetActivePageRequest } from './activePage'
 export default function* rootSaga() {
     yield [
         fork(watchGetUserRequest),
         fork(watchGetUserRepoRequest),
         fork(watchGetUserFilterRepoRequest),
         fork(watchRepoStarGazersRequest),
-        fork(watchShowMessageRequest)
+        fork(watchShowMessageRequest),
+        fork(watchSetActivePageRequest)
     ]
 }

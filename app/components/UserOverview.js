@@ -21,7 +21,6 @@ class UserOverview extends React.Component {
 
     renderStat(stat) {
 
-
         return (
             <Styles.List key={stat.name}>
                 <p>{stat.value}</p>

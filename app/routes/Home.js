@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { getUserRequest, setUserInfo } from '../actions/user'
 import { getUserReposRequest, setUserReposInfo } from '../actions/repositories'
 import { getUserFilterReposRequest } from '../actions/filterRepositories'
+import { setActivePageRequest } from '../actions/activePage'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { RingLoader } from 'react-spinners'
@@ -10,6 +11,7 @@ import UserOverView from '../components/UserOverview'
 import UserRepositories from '../components/UserRepositories'
 import MessageBox from '../components/MessageBox'
 import * as Styles from '../styles/HomeStyle'
+import Pagination from "react-js-pagination";
 
 class Home extends Component {
 
@@ -21,13 +23,15 @@ class Home extends Component {
             username: props.user != null ? props.user.login :  "",
             repositories: props.repositories != null ? props.repositories : [],
             filterRepositories: props.filterRepositories != null ? props.filterRepositories : [],
-            user: props.user
+            user: props.user,
+            activePage: props.activePage || 1
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.onChange = this.onChange.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
         this.clearFilter = this.clearFilter.bind(this)
+        this.handlePageChange = this.handlePageChange.bind(this)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -80,23 +84,29 @@ class Home extends Component {
             this.props.getUserFilterReposRequest(emptyRepo, "")
             this.props.setUserReposInfo(emptyRepo)
             this.props.getUserRequest(this.input.value)
+            this.props.setActivePageRequest(1)
             this.setState({
                 loading: true,
                 username: this.input.value,
                 filterRepositories: [],
                 filterString: "",
-                repositories: []
+                repositories: [],
+                activePage: 1
             })
         }
+    }
+
+    handlePageChange(pageNumber) {
+        this.setState({activePage: pageNumber})
+        this.props.setActivePageRequest(pageNumber)
+        window.scrollTo(0, 0)
     }
 
     handleKeyPress(event) {
 
         let filterString = this.search.value
         if (event.charCode == 13 && filterString.length > 0) {
-            this.setState({
-                filterString: filterString
-            })
+
             let filteredRepositories = []
             this.state.repositories.map(repository => {
                 var check = false
@@ -113,16 +123,21 @@ class Home extends Component {
                 }
             })
             this.setState({
-                filterRepositories: filteredRepositories
+                filterRepositories: filteredRepositories,
+                filterString: filterString,
+                activePage: 1
             })
             this.props.getUserFilterReposRequest(filteredRepositories, filterString)
+            this.props.setActivePageRequest(1)
         }
         else if (event.charCode == 13 && filterString.length == 0) {
             this.setState({
                 filterRepositories: [],
-                filterString: ""
+                filterString: "",
+                activePage: 1
             })
             this.props.getUserFilterReposRequest([], "")
+            this.props.setActivePageRequest(1)
         }
     }
 
@@ -142,7 +157,8 @@ class Home extends Component {
             user,
             repositories,
             filterRepositories,
-            filterString
+            filterString,
+            activePage
         } = this.state
 
         let userData, repositoryData, filterRepoData
@@ -207,7 +223,14 @@ class Home extends Component {
                                         defaultValue=""
                                         placeholder="Search repositories..."
                                     />
-                                    <UserRepositories repositories={repositories} />
+                                    <UserRepositories repositories={repositories.slice((activePage - 1) * 10, activePage * 10)} />
+                                    <Pagination
+                                        activePage={this.state.activePage}
+                                        itemsCountPerPage={10}
+                                        totalItemsCount={repositories.length}
+                                        pageRangeDisplayed={5}
+                                        onChange={this.handlePageChange}
+                                    />
                                 </div>
                                 :
                                 loading == false && filterString.length > 0 && filterRepoData == true ?
@@ -223,7 +246,14 @@ class Home extends Component {
                                             <Styles.FilterMessage><strong>{filterRepositories.length}</strong> results for repositories matching <strong>{filterString}</strong></Styles.FilterMessage>
                                             <Styles.ClearButton onClick = {this.clearFilter}>Clear Filter</Styles.ClearButton>
                                         </Styles.FilterInfoWrapper>
-                                        <UserRepositories repositories={filterRepositories} />
+                                        <UserRepositories repositories={filterRepositories.slice((activePage - 1) * 10, activePage * 10)} />
+                                        <Pagination
+                                            activePage={this.state.activePage}
+                                            itemsCountPerPage={10}
+                                            totalItemsCount={filterRepositories.length}
+                                            pageRangeDisplayed={5}
+                                            onChange={this.handlePageChange}
+                                        />
                                     </div>
                                     :
                                     loading == false && filterString.length > 0 && filterRepoData == false ?
@@ -253,6 +283,7 @@ const mapStateToProps = state => ({
     repositories: state.repositories,
     filterRepositories: state.filterData.filterRepositories,
     filterString: state.filterData.filterString,
+    activePage: state.activePage,
     messages: state.messages
 })
 
@@ -261,7 +292,8 @@ const mapDispatchToProps = {
     setUserInfo,
     getUserReposRequest,
     setUserReposInfo,
-    getUserFilterReposRequest
+    getUserFilterReposRequest,
+    setActivePageRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
