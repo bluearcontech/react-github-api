@@ -204,7 +204,7 @@ class Home extends Component {
                                         innerRef={x => { this.search = x }}
                                         onChange={this.onChange}
                                         onKeyPress={this.handleKeyPress}
-                                        vlaue=""
+                                        defaultValue=""
                                         placeholder="Search repositories..."
                                     />
                                     <UserRepositories repositories={repositories} />
