@@ -12,7 +12,7 @@ import UserRepositories from '../components/UserRepositories'
 import MessageBox from '../components/MessageBox'
 import * as Styles from '../styles/HomeStyle'
 import Pagination from "react-js-pagination";
-
+import { GoX } from 'react-icons/lib/go'
 class Home extends Component {
 
     constructor(props) {
@@ -263,7 +263,10 @@ class Home extends Component {
                                             defaultValue={this.state.filterString}
                                             placeholder="Search repositories..."
                                         />
-                                        <Styles.Label>There is not repository with this keyword</Styles.Label>
+                                        <Styles.ClearWrapper>
+                                            <Styles.ClearLabel>There is not repository with this keyword</Styles.ClearLabel>
+                                            <GoX onClick={this.clearFilter} className="clear" style={{marginBottom:'20px'}}/>
+                                        </Styles.ClearWrapper>
                                     </div>
                                     :
                                     ''

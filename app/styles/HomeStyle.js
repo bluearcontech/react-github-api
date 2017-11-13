@@ -7,6 +7,10 @@ const Label = styled.h1`
     margin-bottom: 2em
 `
 
+const ClearLabel = styled.h4`
+    display:inline;
+    color: pink`
+
 const Form = styled.form``
 
 const SearchButton = styled.button`
@@ -64,4 +68,12 @@ const FilterInfoWrapper = styled.div`
     padding-top: 15px;
     padding-bottom: 15px;
 `
-export { Label, Form, SearchButton, SearchWrapper, Input, SearchBox, Wrapper, SpinnerDiv, FilterMessage, ClearButton, FilterInfoWrapper}
+
+const ClearWrapper = styled.div`
+    margin-top:30px;
+    text-align: center;
+    &:hover .clear {
+        color: blue;
+}
+`
+export { Label, Form, SearchButton, SearchWrapper, Input, SearchBox, Wrapper, SpinnerDiv, FilterMessage, ClearButton, FilterInfoWrapper, ClearLabel, ClearWrapper}
