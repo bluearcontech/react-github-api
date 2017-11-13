@@ -40,3 +40,8 @@ If `NODE_ENV` is development, we apply Webpack middlewares for bundling and Hot 
 ### Client
 The `app` directory contains all the shared components, routes and reducers.
 
+## ScreenShot
+![Alt text](app/screen/screen1.png?raw=true "Homepage")
+![Alt text](app/screen/screen2.png?raw=true "Pagination")
+![Alt text](app/screen/screen3.png?raw=true "Filter")
+![Alt text](app/screen/screen4.png?raw=true "StarGazers")
