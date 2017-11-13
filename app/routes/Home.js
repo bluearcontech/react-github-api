@@ -39,9 +39,6 @@ class Home extends Component {
             this.setState({
                 user: nextProps.user
             })
-            if (typeof (nextProps.user) == "object") {
-                this.props.getUserReposRequest(this.state.username)
-            }
         } else if (!Object.is(this.state.repositories, nextProps.repositories)) {
             if (typeof (nextProps.repositories) == "object") {
                 this.setState({
@@ -85,6 +82,7 @@ class Home extends Component {
             this.props.setUserReposInfo(emptyRepo)
             this.props.getUserRequest(this.input.value)
             this.props.setActivePageRequest(1)
+            this.props.getUserReposRequest(this.input.value)
             this.setState({
                 loading: true,
                 username: this.input.value,
