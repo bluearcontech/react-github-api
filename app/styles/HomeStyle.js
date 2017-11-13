@@ -74,6 +74,13 @@ const ClearWrapper = styled.div`
     text-align: center;
     &:hover .clear {
         color: blue;
-}
+    }
 `
-export { Label, Form, SearchButton, SearchWrapper, Input, SearchBox, Wrapper, SpinnerDiv, FilterMessage, ClearButton, FilterInfoWrapper, ClearLabel, ClearWrapper}
+const ClearFilter = styled.div`
+    text-align:right;
+    margin-right:20px;
+    &:hover .test {
+        color: blue;
+    }
+`
+export { Label, Form, SearchButton, SearchWrapper, Input, SearchBox, Wrapper, SpinnerDiv, FilterMessage, ClearButton, FilterInfoWrapper, ClearLabel, ClearWrapper, ClearFilter}

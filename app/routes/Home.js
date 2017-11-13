@@ -242,7 +242,10 @@ class Home extends Component {
                                         />
                                         <Styles.FilterInfoWrapper>
                                             <Styles.FilterMessage><strong>{filterRepositories.length}</strong> results for repositories matching <strong>{filterString}</strong></Styles.FilterMessage>
-                                            <Styles.ClearButton onClick = {this.clearFilter}>Clear Filter</Styles.ClearButton>
+                                            <Styles.ClearFilter>
+                                                Clear Filter
+                                                <GoX onClick={this.clearFilter} className="test" style={{marginBottom:'20px'}}/>
+                                            </Styles.ClearFilter>
                                         </Styles.FilterInfoWrapper>
                                         <UserRepositories repositories={filterRepositories.slice((activePage - 1) * 10, activePage * 10)} />
                                         <Pagination
