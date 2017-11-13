@@ -18,14 +18,14 @@ for asynchronous action creators.
 
 ## Quickstart
 ```
-git clone
+git clone https://github.com/bluearcontech/react-github-api.git your_app
 cd your_app
 npm install
 npm run start
 ```
 
 ## Available Commands
-`npm run start` - starts the production server.
+`npm run start` - starts the development server.
 
 ## File Structure
 
