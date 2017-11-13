@@ -47,5 +47,21 @@ const SpinnerDiv = styled.div`
     height: 50px;
     margin-top: 40px;
 `
+const FilterMessage = styled.div`
+    vertical-align: top !important;
+    margin-bottom: 10px;
+    float: left
+`
 
-export { Label, Form, SearchButton, SearchWrapper, Input, SearchBox, Wrapper, SpinnerDiv}
+const ClearButton = styled.button`
+    margin-left: 50px
+`
+
+const FilterInfoWrapper = styled.div`
+    margin-top: 15px;
+    border-bottom: 1px #e1e4e8 solid !important;
+    border-top: 1px #e1e4e8 solid !important;
+    padding-top: 15px;
+    padding-bottom: 15px;
+`
+export { Label, Form, SearchButton, SearchWrapper, Input, SearchBox, Wrapper, SpinnerDiv, FilterMessage, ClearButton, FilterInfoWrapper}

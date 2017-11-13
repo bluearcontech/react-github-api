@@ -27,6 +27,7 @@ class Home extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.onChange = this.onChange.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
+        this.clearFilter = this.clearFilter.bind(this)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -61,6 +62,15 @@ class Home extends Component {
                 })
             }
         }
+    }
+
+    clearFilter() {
+        this.setState({
+            filterRepositories: [],
+            filterString: ""
+        })
+        this.search.value = ""
+        this.props.getUserFilterReposRequest([], "")
     }
 
     handleSubmit(event) {
@@ -194,7 +204,7 @@ class Home extends Component {
                                         innerRef={x => { this.search = x }}
                                         onChange={this.onChange}
                                         onKeyPress={this.handleKeyPress}
-                                        defaultValue={this.state.filterString}
+                                        vlaue=""
                                         placeholder="Search repositories..."
                                     />
                                     <UserRepositories repositories={repositories} />
@@ -209,6 +219,10 @@ class Home extends Component {
                                             defaultValue={this.state.filterString}
                                             placeholder="Search repositories..."
                                         />
+                                        <Styles.FilterInfoWrapper>
+                                            <Styles.FilterMessage><strong>{filterRepositories.length}</strong> results for repositories matching <strong>{filterString}</strong></Styles.FilterMessage>
+                                            <Styles.ClearButton onClick = {this.clearFilter}>Clear Filter</Styles.ClearButton>
+                                        </Styles.FilterInfoWrapper>
                                         <UserRepositories repositories={filterRepositories} />
                                     </div>
                                     :

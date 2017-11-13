@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json.
 app.use(bodyParser.json());
 
-
 if (process.env.NODE_ENV === 'development') {
 	//webpack configuration
 	const config = require('../webpack.config.dev');
